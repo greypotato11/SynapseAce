@@ -5223,56 +5223,6 @@
         <li data-action="1" id="Comment" onclick="CommentFunc()">Comment selection</li>
         <li data-action="2" onclick="BeautifyFunc()">Beautify selection ctrl+b</li>
         <li data-action="3" onclick="ClearText()">Clear</li>
-
-	  const tabBar = document.getElementById('tab-bar');
-  const addTabButton = document.getElementById('add-tab');
-  const editorContainer = document.getElementById('editor');
-
-  let editors = [];
-  let tabs = [];
-  let activeTabIndex = -1;
-
-  function createTab() {
-    const tabIndex = editors.length;
-
-    const tabButton = document.createElement('button');
-    tabButton.className = 'tab';
-    tabButton.textContent = `Tab ${tabIndex + 1}`;
-    tabButton.onclick = () => switchTab(tabIndex);
-    tabBar.insertBefore(tabButton, addTabButton);
-
-    const editorDiv = document.createElement('div');
-    editorDiv.id = `editor-${tabIndex}`;
-    editorDiv.style.display = 'none';
-    editorDiv.style.height = '100%';
-    editorDiv.style.width = '100%';
-    editorContainer.appendChild(editorDiv);
-
-    const editor = ace.edit(editorDiv.id);
-    editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/javascript");
-
-    editors.push(editor);
-    tabs.push(tabButton);
-
-    switchTab(tabIndex);
-  }
-
-  function switchTab(index) {
-    if (activeTabIndex === index) return;
-
-    if (activeTabIndex >= 0) {
-      document.getElementById(`editor-${activeTabIndex}`).style.display = 'none';
-      tabs[activeTabIndex].classList.remove('active');
-    }
-
-    document.getElementById(`editor-${index}`).style.display = 'block';
-    tabs[index].classList.add('active');
-    activeTabIndex = index;
-  }
-
-  addTabButton.addEventListener('click', createTab);
-  createTab();
     </ul>
 
 </body>
