@@ -5105,6 +5105,12 @@
 
         ace.require("ace/ext/language_tools");
         var editor = ace.edit("editor");
+        window.addEventListener("message", (event) => {
+  if (event.data === "get_code") {
+    const code = editor.getValue();  // Get the current code in the editor
+    window.parent.postMessage({ type: "code_response", code }, "*");  // Send it back to the parent
+  }
+        });
         editor.setTheme("ace/theme/tomorrow_night_eighties");
         editor.session.setMode("ace/mode/lua");
         editor.setOption("enableLiveAutocompletion", true);
@@ -5219,13 +5225,6 @@
           return false;
         }
 
-        window.addEventListener("message", (event) => {
-  if (event.data === "get_code") {
-    const editor = ace.edit("editor"); // Get the Ace editor
-    const code = editor.getValue(); // Get the code inside Ace editor
-    window.parent.postMessage({ type: "code_response", code }, "*");
-  }
-});
         
     </script>
     <ul class='custom-menu' id='Menu'>
