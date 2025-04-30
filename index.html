@@ -61,6 +61,14 @@
 <body style="background-color: #282f38">
     <pre id="editor"></pre>
     <script>
+        
+  window.addEventListener("message", (event) => {
+    if (event.data === "get_code") {
+      const editor = ace.edit("editor"); // assumes editor has id="editor"
+      const code = editor.getValue();
+      window.parent.postMessage({ type: "code_response", code }, "*");
+    }
+  });
 
         /*
          Stravant thing in js
