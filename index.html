@@ -61,14 +61,6 @@
 <body style="background-color: #282f38">
     <pre id="editor"></pre>
     <script>
-        
-  window.addEventListener("message", (event) => {
-    if (event.data === "get_code") {
-      const editor = ace.edit("editor"); // assumes editor has id="editor"
-      const code = editor.getValue();
-      window.parent.postMessage({ type: "code_response", code }, "*");
-    }
-  });
 
         /*
          Stravant thing in js
@@ -5226,6 +5218,15 @@
         {
           return false;
         }
+
+        window.addEventListener("message", (event) => {
+  if (event.data === "get_code") {
+    const editor = ace.edit("editor"); // Get the Ace editor
+    const code = editor.getValue(); // Get the code inside Ace editor
+    window.parent.postMessage({ type: "code_response", code }, "*");
+  }
+});
+        
     </script>
     <ul class='custom-menu' id='Menu'>
         <li data-action="1" id="Comment" onclick="CommentFunc()">Comment selection</li>
